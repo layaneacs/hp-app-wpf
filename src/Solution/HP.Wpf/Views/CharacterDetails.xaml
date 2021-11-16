@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="HP.Wpf.Views.CharacterDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HP.Wpf.Views" xmlns:viewmodels="clr-namespace:HP.ViewModels;assembly=HP" d:DataContext="{d:DesignInstance Type=viewmodels:CharactersViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Width="500" Height="250" HorizontalAlignment="Left" Margin="25">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100" x:Name="ImagePerfil"/>
+                <ColumnDefinition Width="*" x:Name="NameCharacter"/>
+            </Grid.ColumnDefinitions>
+            <DockPanel Grid.Column="0">
+            <!--<DockPanel Grid.Column="0" DataContext="{Binding Characters}">-->
+                <Image Source="{Binding CharacterSelected.Image}"/>                
+            </DockPanel>
+            <DockPanel Grid.Column="1" Background="AliceBlue">
+                <TextBlock Text="{Binding CharacterSelected.Name}" Background="{Binding HouseColor}" FontSize="16" FontWeight="Bold" VerticalAlignment="Center" Margin="20 0 0 0"/>
+            </DockPanel>
+        </Grid>
+
+        <StackPanel Grid.Column="0" Grid.Row="1"  Orientation="Horizontal">
+            <TextBlock Text="outras informações" />
+        </StackPanel>
+    </Grid>
+
+</UserControl>
