@@ -1,5 +1,6 @@
 ﻿using HP.Models;
 using HP.Services;
+using Microsoft.AppCenter.Analytics;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -39,6 +40,12 @@ namespace HP.ViewModels
             set
             {
                 _characterSelected = value;
+
+                Analytics.TrackEvent(nameof(CharactersViewModel), 
+                    new Dictionary<string, string> { 
+                        { "Casa selecionada", (string.IsNullOrEmpty(_characterSelected.House) ? "deconhecido" : _characterSelected.House) } 
+                    });
+
                 SelectHouseColor(_characterSelected.House);
                 NotifyPropertyChanged("CharacterSelected");
             }
@@ -50,7 +57,7 @@ namespace HP.ViewModels
             get => _houseColor;
             set
             {
-                _houseColor = value;
+                _houseColor = value;                
                 NotifyPropertyChanged("HouseColor");
             }
         }

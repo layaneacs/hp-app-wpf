@@ -1,4 +1,5 @@
 ﻿using HP.Models;
+using Microsoft.AppCenter.Analytics;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -23,10 +24,11 @@ namespace HP.Services
 
             HttpClient client = new HttpClient();
             HttpResponseMessage response = await client.GetAsync(url);
+            Analytics.TrackEvent(nameof(HPService), new Dictionary<string, string> { { "StatusCode", response.StatusCode.ToString() } });
 
             string responseText;
             if (response.IsSuccessStatusCode)
-            {
+            {  
                 responseText = await response.Content.ReadAsStringAsync();
                 return JsonConvert.DeserializeObject<List<Character>>(responseText);
             }
